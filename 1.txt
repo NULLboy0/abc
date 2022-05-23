@@ -1,0 +1,101 @@
+/*
+Practical No: 01 - A C++ Program to implement Hash Table Data Structure 
+ and Handle Collision using Linear and Quadratic Probing
+ and Compare no. of comarisons required for Searching a set of Keys.
+ Data Used: Key = Client Name and Value = Telephone No.
+ Type of Hashing = Closed Hashing.
+*/
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+int Tablesize = 10;
+struct HashTable
+{
+ char Key[10];
+ 
+ int Val; 
+ 
+ int Comp;
+ 
+}HT1[10], HT2[10]; 
+ 
+void init()
+{
+ int i;
+ 
+ for(i=0; i<Tablesize; i++)
+ {
+ strcpy(HT1[i].Key , ".....");
+ HT1[i].Val = 0;
+ HT1[i].Comp = 0;
+ }
+ 
+ for(i=0; i<Tablesize; i++)
+ {
+ strcpy(HT2[i].Key , ".....");
+ HT2[i].Val = 0;
+ HT2[i].Comp = 0;
+ }
+}
+int HashFun(char key[]) 
+{
+ int i, index, sum = 0;
+ 
+ for(i=0; key[i] != '\0'; i++)
+ {
+ sum = sum + key[i];
+ }
+ index = sum % Tablesize; 
+ 
+ return index;
+}
+void insert_HT1(char Cname[], int Tele) 
+{
+ int index = HashFun(Cname);
+ 
+ if(strcmp(HT1[index].Key , ".....") == 0)
+ {
+ strcpy(HT1[index].Key , Cname);
+ HT1[index].Val = Tele;
+ }
+ else 
+ {
+ while(strcmp(HT1[index].Key , ".....") != 0)
+ index = (index + 1) % Tablesize;
+ 
+ strcpy(HT1[index].Key , Cname);
+ HT1[index].Val = Tele;
+ }
+}
+ 
+ 
+void display()
+{
+ int i;
+ cout<<"\n\n------ Hash Table 01 ------ ";
+ cout<<"\n\n Bucket (Key , Value)";
+ for(i=0; i<Tablesize; i++)
+ {
+ cout<<"\n "<<i<<" - ("<<HT1[i].Key<<" , "<<HT1[i].Val<<")";
+ }
+ 
+ cout<<"\n\n------ Hash Table 02 ------ ";
+ cout<<"\n\n Bucket (Key , Value)";
+ for(i=0; i<Tablesize; i++)
+ {
+ cout<<"\n "<<i<<" - ("<<HT2[i].Key<<" , "<<HT2[i].Val<<")";
+ }
+}
+ 
+int main()
+{
+ 
+ init();
+ 
+ insert_HT1("Amol", 1234);
+ insert_HT1("Amol", 5678);
+ 
+ display();
+ return 0;
+}

@@ -1,0 +1,53 @@
+/*
+Practical No: 12
+Title: A C++ Program to implement Random/Direct Access Files.
+*/
+
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+int main()
+{
+ cout<<"\n\n Program to implement Random/Direct Access Files \n\n";
+
+ ofstream fout;
+
+ fout.open("One.txt" , ios::out);
+ cout<<"\n Writting into the file.....\n";
+
+ cout<<"\n Location: "<<fout.tellp();
+ cout<<" Line 01: Hello Dude, I am Virat!";
+ fout<<"Hello Dude, I am Virat!"<<endl;
+
+ cout<<"\n Location: "<<fout.tellp();
+ cout<<" Line 02: Can we be friends?";
+ fout<<"Can we be friends?"<<endl;
+
+ cout<<"\n Location: "<<fout.tellp();
+ cout<<" Line 03: We will have fun";
+ fout<<"We will have fun"<<endl;
+
+ cout<<"\n Location: "<<fout.tellp()<<endl;
+ fout.close();
+ ifstream fin;
+
+ fin.open("One.txt" , ios::in);
+ cout<<"\n Reading from the file.....\n";
+
+ cout<<"\n Location: "<<fin.tellg();
+ cout<<"\n Shift control to...";
+ fin.seekg(64 , ios::beg);
+ cout<<"\n Location: "<<fin.tellg();
+ cout<<" Reading.... ";
+ char c;
+ while(!fin.eof())
+ {
+ fin.get(c);
+ cout<<c;
+ }
+ cout<<"\n Conclusion: We have directly accessed the line-3 of the file.";
+ fin.close();
+
+ return 0;
+}

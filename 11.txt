@@ -1,0 +1,62 @@
+/*
+Practical No: 11
+Title: A C++ Program for Sequential Access File Handling
+*/
+
+#include<iostream>
+#include<fstream>
+using namespace std;
+
+int main()
+{
+ cout<<"\n\n   C++ Program for Sequential File Handling ";
+ fstream Myfile;
+ 
+ char buffer[40];
+
+ cout<<"\n\n\t Step 01: Opening File for Writing";
+ Myfile.open("File1.txt" , ios::out);
+
+ if(!Myfile)
+ cout<<"\n\n Error in opening the file.";
+ else
+ {
+ cout<<"\n\n\t Step 02: File Opened Successfully...!!!";
+ cout<<"\n\n\t Step 03: Writing into the File.....\n";
+
+ cout<<"\n Line 01: "<<"Hey dude, I am Virat";
+ Myfile<<"Hey dude, I am Virat"<<endl;
+
+ cout<<"\n Line 02: "<<" Can you be my Friend?";
+ Myfile<<" Can you be my Friend?"<<endl;
+
+ cout<<"\n Line 03: "<<"We will have fun!";
+ Myfile<<"We will have fun!"<<endl;
+ }
+ Myfile.close();
+ cout<<"\n\n\t Step 04: The file has been closed successfully!";
+
+ cout<<"\n\n\t Step 05: Opening File for Reading.....";
+
+ Myfile.open("File1.txt" , ios::in);
+ if(!Myfile)
+ cout<<"\n\n Error in Opening the file.";
+ else
+ {
+ cout<<"\n\n\t Step 06: The file is Opened Succesfully!";
+ cout<<"\n\n\t Step 07: Reading from the File.\n";
+
+ Myfile.getline(buffer, 40);
+ cout<<"\n Line 01: "<<buffer;
+
+ Myfile.getline(buffer, 40);
+ cout<<"\n Line 02: "<<buffer;
+
+ Myfile.getline(buffer, 40);
+ cout<<"\n Line 03: "<<buffer;
+ }
+ Myfile.close();
+ cout<<"\n\n\t Step 08: The file has been closed succesfully!";
+
+ return 0;
+}
